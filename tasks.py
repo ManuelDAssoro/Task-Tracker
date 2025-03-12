@@ -34,8 +34,20 @@ else:
 
 
 
-def addTask(id, description, status, createdDate, updatedDate): #Add a task method
-    task = Task(id, description, status, createdDate, updatedDate)
+def addTask(): #Add a task method 
+    print("Add a new Task")
+    flag = 0
+    while (flag == 0):
+        id = input("ID: ")
+        if any(task.id == id for task in Tasks):
+            print("ID already exists")
+        else:
+            flag = 1;
+    description = input("Description: ")
+    status = input("Status: ")
+    createdDate = date.today()
+    updatedDate = date.today()
+    task = Task(id, description, status, createdDate, updatedDate)    
     Tasks.append(task)
     loadTasks()
     print("Task added")
@@ -67,9 +79,10 @@ def printTasks(): #Print all tasks and their attributes
     
 
 
+addTask() #Test input
+os.system("clear")
 printTasks()
-print("Add a new Task")
-addTask(input("ID "),input("Description "),input("status "),date.today(), date.today()) #Test input
+addTask() #Test input
 os.system("clear")
 printTasks()
 updateTask(input("Enter the ID to modify a Task")) #Test input
