@@ -77,17 +77,13 @@ def printTasks(): #Print all tasks and their attributes
         print ("Created: ", task.createdAt)
         print ("Modified: ", task.updatedAt)
     
+def printDoneTasks() #Print all tasks that are done
 
+def printToDoTasks() #Print all tasks that are not done
 
-addTask() #Test input
-os.system("clear")
-printTasks()
-addTask() #Test input
-os.system("clear")
-printTasks()
-updateTask(input("Enter the ID to modify a Task")) #Test input
-os.system("clear")
-printTasks()
-deleteTask(input("Enter the ID to delete a Task ")) #Test input
-os.system("clear")
-printTasks()
+def printInProgressTasks() #Print all tasks that are in progress
+
+def markInProgress(id): #Mark a task as in progress
+
+def markDone(id): #Mark a task as done
+
