@@ -1,14 +1,16 @@
 import tasks #Import tasks module
 import os
+import os.path
 import datetime
 
 def main():
-    path = '/Tasks.json ' #Define path as the Task's file path
+    path = '/home/manuel/roadmap/Tasks.json' #Define path as the Task's file path
     if os.path.exists(path): #Check if path exist, if it doesn't create it
         print("Loading your Task list!")
+        tasks.loadTasks()
     else:
         print("No task list found! Creating a new one...")
-        tasks.loadTasks()
+        tasks.saveTasks()
     option = 0
     print("Welcome to Task Tracker!")
     while (option != 10):

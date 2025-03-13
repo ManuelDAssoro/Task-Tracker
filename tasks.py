@@ -13,22 +13,21 @@ class Task:
 
 Tasks = []
 
+def loadTasks(): #Load the Tasks list from the file
+    global Tasks
+    with open("/home/manuel/roadmap/Tasks.json", "r") as f:
+        task_dicts = json.load(f)
+        Tasks = [Task(task['id'], task['description'], task['status'], date.fromisoformat(task['createdAt']), date.fromisoformat(task['updatedAt'])) for task in task_dicts]
 
-
-def loadTasks(): #Saves the updated Tasks list to the file
-    with open('Tasks.json','w') as outfile:
+def saveTasks(): #Saves the updated Tasks list to the file
+    with open("Tasks.json","w") as f:
         json.dump([{ #Convert the Tasks list to a dictionary, and each attribute to string to be compatible with the JSON file
             'id': task.id,
             'description': task.description,
             'status': task.status,
             'createdAt': task.createdAt.isoformat(),
             'updatedAt': task.updatedAt.isoformat()
-        } for task in Tasks], outfile)
-
-
-
-
-
+        } for task in Tasks], f)
 
 def addTask(): #Add a task method 
     print("Add a new Task")
@@ -45,7 +44,7 @@ def addTask(): #Add a task method
     updatedDate = date.today()
     task = Task(id, description, status, createdDate, updatedDate)    
     Tasks.append(task)
-    loadTasks()
+    saveTasks()
     print("Task added")
 
 def deleteTask(id): #Delete task method
@@ -53,7 +52,7 @@ def deleteTask(id): #Delete task method
         if task.id == id:
             Tasks.remove(task)
         print("Task deleted")
-        loadTasks()
+        saveTasks()
 
 def updateTask(id):
     for task in Tasks:
@@ -61,7 +60,7 @@ def updateTask(id):
             print(task.description)
             task.description = input("Write the updated description ")
         print("Task updated")
-        loadTasks()
+        saveTasks()
 
 def printTasks(): #Print all tasks and their attributes
     if not Tasks:
@@ -106,7 +105,7 @@ def markInProgress(id): #Mark a task as in progress
             task.status = "in-progress"
             task.updatedAt = date.today()
         print("Task marked as in progress")
-        loadTasks()
+        saveTasks()
 
 def markDone(id): #Mark a task as done
     for task in Tasks:
@@ -114,5 +113,5 @@ def markDone(id): #Mark a task as done
             task.status = "done"
             task.updatedAt = date.today()
         print("Task marked as done")
-        loadTasks()
+        saveTasks()
 
