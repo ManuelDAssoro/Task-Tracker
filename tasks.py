@@ -13,7 +13,7 @@ class Task:
 
 Tasks = []
 
-path = './Tasks.json' #Define path as the Task's file path
+
 
 def loadTasks(): #Saves the updated Tasks list to the file
     with open('Tasks.json','w') as outfile:
@@ -25,11 +25,7 @@ def loadTasks(): #Saves the updated Tasks list to the file
             'updatedAt': task.updatedAt.isoformat()
         } for task in Tasks], outfile)
 
-if os.path.exists(path): #Check if path exist, if it doesn't create it
-    print("Loading your Task list!")
-else:
-    print("No task list found! Creating a new one...")
-    loadTasks()
+
 
 
 
@@ -77,13 +73,46 @@ def printTasks(): #Print all tasks and their attributes
         print ("Created: ", task.createdAt)
         print ("Modified: ", task.updatedAt)
     
-def printDoneTasks() #Print all tasks that are done
+def printDoneTasks(): #Print all tasks that are done
+    for task in Tasks:
+        if task.status == "done":
+            print ("ID: ", task.id)
+            print ("Description: ", task.description)
+            print ("Status: ", task.status)
+            print ("Created: ", task.createdAt)
+            print ("Modified: ", task.updatedAt)
 
-def printToDoTasks() #Print all tasks that are not done
+def printToDoTasks(): #Print all tasks that are not done
+    for task in Tasks:
+        if task.status == "todo":
+            print ("ID: ", task.id)
+            print ("Description: ", task.description)
+            print ("Status: ", task.status)
+            print ("Created: ", task.createdAt)
+            print ("Modified: ", task.updatedAt)   
 
-def printInProgressTasks() #Print all tasks that are in progress
+def printInProgressTasks(): #Print all tasks that are in progress
+    for task in Tasks:
+        if task.status == "in-progress":
+            print ("ID: ", task.id)
+            print ("Description: ", task.description)
+            print ("Status: ", task.status)
+            print ("Created: ", task.createdAt)
+            print ("Modified: ", task.updatedAt)
 
 def markInProgress(id): #Mark a task as in progress
+    for task in Tasks:
+        if task.id == id:
+            task.status = "in-progress"
+            task.updatedAt = date.today()
+        print("Task marked as in progress")
+        loadTasks()
 
 def markDone(id): #Mark a task as done
+    for task in Tasks:
+        if task.id == id:
+            task.status = "done"
+            task.updatedAt = date.today()
+        print("Task marked as done")
+        loadTasks()
 

@@ -1,8 +1,14 @@
-import tasks
+import tasks #Import tasks module
 import os
 import datetime
 
 def main():
+    path = '/Tasks.json ' #Define path as the Task's file path
+    if os.path.exists(path): #Check if path exist, if it doesn't create it
+        print("Loading your Task list!")
+    else:
+        print("No task list found! Creating a new one...")
+        tasks.loadTasks()
     option = 0
     print("Welcome to Task Tracker!")
     while (option != 10):
@@ -12,25 +18,41 @@ def main():
         match option:
             case 1:
                 tasks.addTask()
+                option = 0
             case 2:
                 id = input("ID: ")
                 tasks.deleteTask(id)
+                option = 0
             case 3:
                 id = input("ID: ")
                 tasks.updateTask(id)
+                option = 0
             case 4:
                 id = input("ID: ")
                 tasks.markInProgress(id)
+                option = 0
             case 5:
                 id = input("ID: ")
                 tasks.markDone(id)
+                option = 0
             case 6:
                 tasks.printTasks()
+                input("\nPress Enter to continue...")
+                option = 0
             case 7:
                 tasks.printDoneTasks()
+                input("\nPress Enter to continue...")
+                option = 0
             case 8:
                 tasks.printToDoTasks()
+                input("\nPress Enter to continue...")
+                option = 0
             case 9:
                 tasks.printInProgressTasks()
+                input("\nPress Enter to continue...")
+                option = 0
             case 10:
-                print("Keep on tracking!")
+                os.system('clear')
+                print("Thanks for using Task Tracker!")      
+
+main()
